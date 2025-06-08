@@ -1,9 +1,19 @@
+import { saveToStorage, loadFromStorage } from "./storage";
+import { getProjects } from "./projects-module";
+
+let projects = getProjects()
+
 let todoData = { title: "", description: "", dueDate: "", status: "", priority: "", notes: ""}
+
+function createTodo({ title = "", description = "", dueDate = "", status = "Not started yet", priority = "Medium", notes = "" } = {}) {
+  return { title, description, dueDate, status, priority, notes };
+}
 
 function addTodo(projectName, todoData) {
     let project = projects.find(project => project.name === projectName);
     if (project) {
         project.todos.push(todoData);
+        saveToStorage(projects);
     } else {
         return "Could not find the project";
     }
@@ -21,6 +31,7 @@ function deleteTodo(projectName, title) {
     if (todoIndex !== -1) {
         project.todos.splice(todoIndex, 1);
         console.log(`Todo "${title}" deleted from project "${projectName}"`);
+        saveToStorage(projects);
     } else {
         return "Could not find Todo";
     }
@@ -45,10 +56,11 @@ function editTodo(projectName, title, todoData) {
                 todo[key] = todoData[key];
             }
         });
+        saveToStorage(projects);
     }
 }
 
-function displayTodos(projectName) {
+function getTodos(projectName) {
     let project = projects.find(project => project.name === projectName);
 
     if (!project) {
@@ -75,7 +87,17 @@ function updateTodoStatus(projectName, title, newStatus) {
 
     if (statusOptions.includes(newStatus)) {
         todo.status = newStatus;
+        saveToStorage(projects);
     } else {
         return "Your status value is invalid";
     }
 }
+
+export {
+  addTodo,
+  deleteTodo,
+  editTodo,
+  getTodos,
+  updateTodoStatus,
+  createTodo
+};

@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="index.js"></script>
     <title>ToDo App</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <aside class="sidebar">
+            <h1>Todo List</h1>
+            <div class="projects-container">
+                <div class="projects-container-header">
+                    <h2 class="projects-container-title">Projects</h2>
+                    <button class="add-project-btn">Add Project +</button>
+                    <dialog class="add-project-dialog">
+                        <form action="" class="add-project-form">
+                            <label for="project_name">Project name</label>
+                            <input type="text" id="project_name">
+                            <button type="submit" id="submit-project-btn">Submit</button>
+                        </form>
+                    </dialog>
+                </div>
+                <nav class="projects-list"></nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h2 class="current-project-title"></h2>
+                <button class="add-todo-btn">Add Todo +</button>
+                <dialog class="add-todo-dialog">
+                    <form action="" class="add-todo-form">
+                        <label for="todo_title">Title</label>
+                        <input type="text" id="todo_title">
+
+                        <label for="todo_description">Description</label>
+                        <input type="text" id="todo_description">
+
+                        <label for="todo_due_date">Due Date</label>
+                        <input type="date" name="todo_due_date" id="todo_due_date">
+
+                        <select name="Status" id="todo_status">
+                            <option value="Not started yet">Not started yet</option>
+                            <option value="In progress">In progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+
+                        <select name="Priority" id="todo_priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+
+                        <label for="todo_notes">Notes</label>
+                        <input type="text" name="todo_notes" id="todo_notes">
+                        
+                        <button type="submit" id="submit-todo-btn">Submit</button>
+                    </form>
+                </dialog>
+            </header>
+            <div class="todo-list"></div>
+        </main>
+
+        <footer class="footer">made with ❤ by Eyal</footer>
+    </div>
 </body>
 </html>
